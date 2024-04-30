@@ -86,10 +86,4 @@ class HomeController extends GetxController {
       _selectedNotes.add(id);
     }
   }
-
-  void refreshNotes() {
-    _notes.value = (_storage.read<List>('notes') ?? [])
-        .map((e) => NoteItem.fromMap(e))
-        .toList();
-  }
 }
