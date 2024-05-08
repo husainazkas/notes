@@ -33,7 +33,7 @@ class NoteDetailController extends GetxController {
           .toList()
         ..removeWhere((e) => e.id == data!.id);
 
-      unawaited(_storage.write('notes', notes));
+      unawaited(_storage.write('notes', notes.map((e) => e.toMap()).toList()));
     }
     Get.back();
   }
