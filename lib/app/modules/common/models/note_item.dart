@@ -36,8 +36,8 @@ class NoteItem {
       'id': id,
       'title': title,
       'content': content,
-      'updated_at': updatedAt.millisecondsSinceEpoch,
-      'created_at': createdAt.millisecondsSinceEpoch,
+      'updated_at': updatedAt.toIso8601String(),
+      'created_at': createdAt.toIso8601String(),
     };
   }
 
@@ -46,8 +46,8 @@ class NoteItem {
       id: map['id']?.toInt() ?? 0,
       title: map['title'],
       content: map['content'],
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updated_at']),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['created_at']),
+      updatedAt: DateTime.parse(map['updated_at']),
+      createdAt: DateTime.parse(map['created_at']),
     );
   }
 
