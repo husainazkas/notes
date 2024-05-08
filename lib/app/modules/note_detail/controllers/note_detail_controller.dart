@@ -19,6 +19,8 @@ class NoteDetailController extends GetxController {
   late final _contentCount = contentController.text.length.obs;
   int get contentCount => _contentCount.value;
 
+  bool _wasDeleted = false;
+
   @override
   void onClose() {
     titleController.dispose();
@@ -35,10 +37,13 @@ class NoteDetailController extends GetxController {
 
       unawaited(_storage.write('notes', notes.map((e) => e.toMap()).toList()));
     }
+    _wasDeleted = true;
     Get.back();
   }
 
   void save() {
+    if (_wasDeleted) return;
+
     List<NoteItem> notes = (_storage.read<List>('notes') ?? [])
         .map((e) => NoteItem.fromMap(e))
         .toList();
