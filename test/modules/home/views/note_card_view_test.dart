@@ -10,7 +10,6 @@ import 'package:notes/app/modules/home/views/note_card_view.dart';
 import '../../../core/path_provider_mock_channel.dart';
 
 void main() {
-  Get.isLogEnable = false;
   late final GetStorage storage;
 
   setUpAll(() async {
@@ -23,6 +22,7 @@ void main() {
   setUp(() async {
     await storage.erase();
     Get.reset();
+    Get.isLogEnable = false;
     Get.testMode = true;
   });
 
