@@ -7,7 +7,6 @@ import 'package:notes/app/modules/home/controllers/home_controller.dart';
 import '../../../core/path_provider_mock_channel.dart';
 
 void main() {
-  Get.testMode = true;
   Get.isLogEnable = false;
   late final GetStorage storage;
   late HomeController homeController;
@@ -22,6 +21,7 @@ void main() {
   setUp(() async {
     await storage.erase();
     Get.reset();
+    Get.testMode = true;
 
     homeController = HomeController();
   });
