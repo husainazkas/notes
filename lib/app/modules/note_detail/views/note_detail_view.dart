@@ -74,7 +74,7 @@ class NoteDetailView extends GetView<NoteDetailController> {
                     ),
                     Obx(
                       () => Text(
-                        switch (controller.content.length) {
+                        switch (controller.contentCount) {
                           final length =>
                             '$length character${length > 1 ? 's' : ''}'
                         },

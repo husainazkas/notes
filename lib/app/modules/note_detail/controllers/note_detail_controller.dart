@@ -14,10 +14,10 @@ class NoteDetailController extends GetxController {
   bool get isEditing => data != null;
 
   late final titleController = TextEditingController(text: data?.title);
-
   late final contentController = TextEditingController(text: data?.content);
-  late final _content = contentController.text.obs;
-  String get content => _content.value;
+
+  late final _contentCount = contentController.text.length.obs;
+  int get contentCount => _contentCount.value;
 
   @override
   void onClose() {
@@ -45,7 +45,7 @@ class NoteDetailController extends GetxController {
     final now = DateTime.now();
 
     if (isEditing) {
-      if ((titleController.text, content) case final result
+      if ((titleController.text, contentController.text) case final result
           when result.$1 != data!.title || result.$2 != data!.content) {
         notes = notes.map((e) {
           if (e.id == data!.id) {
@@ -61,14 +61,15 @@ class NoteDetailController extends GetxController {
         }).toList();
       }
     } else {
-      if (titleController.text.isNotEmpty || content.isNotEmpty) {
+      if (titleController.text.isNotEmpty ||
+          contentController.text.isNotEmpty) {
         final sortedNotes = notes..sort((a, b) => a.id.compareTo(b.id));
         final id = (sortedNotes.lastOrNull?.id ?? 0) + 1;
 
         final result = NoteItem(
           id: id,
           title: titleController.text,
-          content: content,
+          content: contentController.text,
           updatedAt: now,
           createdAt: now,
         );
@@ -81,6 +82,6 @@ class NoteDetailController extends GetxController {
   }
 
   void onTypingContent() {
-    _content.value = contentController.text;
+    _contentCount.value = contentController.text.length;
   }
 }
